@@ -1,0 +1,32 @@
+﻿.hero{
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--primary-color);
+}
+
+.hero-video{
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(50%);
+}
+
+.hero-content{
+    z-index:1;
+}
+
+.hero-scroll-btn{
+    position: absolute;
+    text-decoration: none;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index:1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
