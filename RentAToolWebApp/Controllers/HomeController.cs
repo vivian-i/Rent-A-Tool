@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RentAToolWebApp.Models;
+using Core.Entities;
 using System.Diagnostics;
 
 namespace RentAToolWebApp.Controllers

@@ -2,29 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Data;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RentAToolWebApp.Data;
-using RentAToolWebApp.Models;
-using RentAToolWebApp.Repositories;
 using RentAToolWebApp.Services;
 
 namespace RentAToolWebApp.Controllers
 {
     public class ClientsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        //private readonly ClientService _clientService;
+        private readonly ClientService _clientService;
 
-        public ClientsController(ApplicationDbContext context)//, ClientRepository clientService)
+        public ClientsController(ClientService clientService)
         {
-            _context = context;
-            //_clientService = clientService;
+            _clientService = clientService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllClients()
+        {
+            var clients = await _clientService.GetAllClients;
+            return Ok(clients);
         }
 
         // GET: Clients
-        public async Task<IActionResult> Index()
+       /* public async Task<IActionResult> Index()
         {
             //IEnumerable<Client> d = await _clientService.GetAllClients;
 
@@ -169,6 +173,6 @@ namespace RentAToolWebApp.Controllers
         private bool ClientExists(int id)
         {
           return (_context.Clients?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        }*/
     }
 }

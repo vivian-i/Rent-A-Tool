@@ -1,4 +1,5 @@
-﻿using RentAToolWebApp.Repositories;
+﻿using Core.Interfaces;
+using Core.Repositories;
 using RentAToolWebApp.Services;
 
 namespace RentAToolWebApp.DependencyInjection

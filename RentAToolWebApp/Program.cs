@@ -1,5 +1,10 @@
+using Core.Data;
+using Core.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RentAToolWebApp.Data;
+using RentAToolWebApp.DependencyInjection;
+using RentAToolWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +15,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+// Register DI: repositories and services
+builder.Services.RegisterDependency();
+
+
 var app = builder.Build();
 
 if(args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    //seeding
-    Seed.SeedData(app);
+    // Call the SeedData method
+    await Seed.SeedData(app);
 }
 
 // Configure the HTTP request pipeline.
@@ -31,6 +41,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Authentication middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

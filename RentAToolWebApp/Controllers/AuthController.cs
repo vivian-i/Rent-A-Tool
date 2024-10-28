@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Core.DTOs;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RentAToolWebApp.DTO;
 using RentAToolWebApp.Services;
 
 namespace RentAToolWebApp.Controllers
