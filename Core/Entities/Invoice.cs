@@ -3,10 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
+    /**
+     *  Invoice one-to-one Rental
+     * 
+     */
     public class Invoice
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         public DateTime InvoiceDate { get; set; }
         public double AmountDue { get; set; }
         public double AmountPaid {  get; set; }
@@ -16,5 +22,9 @@ namespace Core.Entities
         [ForeignKey(nameof(Rental))]
         public int RentalId { get; set; }
         public Rental Rental { get; set; }
+
+        [ForeignKey(nameof(Equipment))]
+        public int EquipmentId { get; set;}
+        public Invoice Equipment {  get; set; }
     }
 }

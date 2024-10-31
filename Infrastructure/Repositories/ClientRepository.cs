@@ -20,7 +20,7 @@ namespace Core.Repositories
             return clients;
         }
 
-        public async Task<Client> GetClientById(int id)
+        public async Task<Client> GetClientById(Guid id)
         {
             if (id == null || _dbContext.Clients == null)
             {
@@ -28,8 +28,8 @@ namespace Core.Repositories
             }
 
             var client = await _dbContext.Clients
-                .Include(c => c.Address)//FK
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync();
             if (client == null)
             {
                 return null;
@@ -40,15 +40,48 @@ namespace Core.Repositories
 
         public void AddClient(Client client)
         {
-            throw new NotImplementedException();
+            _dbContext.Clients.AddAsync(client);
+            _dbContext.SaveChangesAsync();
         }
 
-        public bool DeleteClient(int id)
+        public async Task<bool> DeleteClientById(Guid id)
+        {
+            bool isDeleted = false;
+
+            var theClient = _dbContext.Clients.FirstOrDefault(e => e.Id == id);
+            _dbContext.Clients.RemoveRange(theClient);
+            await _dbContext.SaveChangesAsync();
+            isDeleted = true;
+
+            return isDeleted;
+        }
+
+        public async Task UpdateClient(Client client)
+        {
+            var existingClient = _dbContext.Clients.FirstOrDefaultAsync(e => e.Id == client.Id);
+            if(existingClient != null)
+            {
+                throw new KeyNotFoundException($"Client with ID {client.Id} not found.");
+            }
+
+            //existingClient.n
+
+            //existingClient.
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public Task<Client> GetClientById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateClient(Client client)
+        bool IClientRepository.UpdateClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteClient(int id)
         {
             throw new NotImplementedException();
         }

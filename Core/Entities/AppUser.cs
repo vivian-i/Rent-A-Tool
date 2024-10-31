@@ -6,7 +6,9 @@ namespace Core.Entities
     public class AppUser //: IdentityId
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }

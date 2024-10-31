@@ -14,7 +14,7 @@ namespace RentAToolWebApp.Services
 
         public Task<IEnumerable<Client>> GetAllClients => _clientRepository.GetAllClients();
         public void GetClientById(int id) => _clientRepository.GetClientById(id);
-        public void AddStudent(Client c) => _clientRepository.AddClient(c);
+        public void AddClient(Client c) => _clientRepository.AddClient(c);
         public bool DeleteClient(int id) => _clientRepository.DeleteClient(id);
 
         public async Task<bool> UpdateClient(Client c, int id)

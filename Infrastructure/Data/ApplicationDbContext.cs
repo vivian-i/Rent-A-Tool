@@ -20,8 +20,42 @@ namespace Core.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);//?
             // Additional configuration, e.g., relationships
+
+            //Rental optional 1-to-many Equipments
+            modelBuilder.Entity<Rental>()
+                .HasMany(e => e.Equipments)
+                .WithOne(e => e.Rental)
+                .HasForeignKey(e => e.RentalId)
+                .IsRequired(false);
+
+            //Rental required 1-to-many Invoices
+            modelBuilder.Entity<Rental>()
+                .HasMany(e => e.Invoices)
+                .WithOne(e => e.Rental)
+                .HasForeignKey(e => e.RentalId)
+                .OnDelete(DeleteBehavior.ClientCascade)
+                .IsRequired(true);
+
+            //Client optional 1-to-many Rentals
+            modelBuilder.Entity<Client>()
+                .HasMany(e => e.Rentals)
+                .WithOne(e => e.Client)
+                .HasForeignKey(e => e.ClientId)
+                .IsRequired(false);
+
+            //Client required 1-to-1 Address
+            modelBuilder.Entity<Client>()
+                .HasOne(e => e.Address)
+                .WithOne(e => e.Client)
+                .HasForeignKey<Address>(e => e.ClientId)
+                .OnDelete(DeleteBehavior.ClientCascade)
+                .IsRequired(true);
+
+            //Equipment optional 1-to-1 Maintenance
+
+
         }
 
     }

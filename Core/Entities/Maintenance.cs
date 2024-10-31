@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
+    /**
+     *  Maintenance optional 1-to-1 Equipment
+     */
     public class Maintenance
     {
         [Key]
@@ -14,6 +17,6 @@ namespace Core.Entities
 
         [ForeignKey(nameof(Equipment))]
         public int EquipmentId { get; set; }
-        public Equipment Equipment { get; set; }
+        public Equipment Equipment { get; set; } = null;
     }
 }

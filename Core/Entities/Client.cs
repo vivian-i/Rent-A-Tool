@@ -3,15 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
+    /**
+     * Client optional 1-to-many Rentals
+     * Client required 1-to-1 Address
+     */
     public class Client
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
 
-        [ForeignKey(nameof(Address))]
-        public int AddressId { get; set; }
+        [ForeignKey(nameof(AppUser))]
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+
         public Address Address { get; set; }
+        public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
     }
 }
