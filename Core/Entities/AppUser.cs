@@ -3,11 +3,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
-    public class AppUser //: IdentityId
+    /**
+     * public class ApplicationUser: IdentityUser
+    {
+        public string Name { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+     */
+    public class AppUser// : IdentityUser
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        [NotMapped]
+        private string FirstName { get; set; }
+        [NotMapped]
+        private string LastName { get; set; }
+
+        public string Name { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public string Username { get; set; }
         public string PasswordHash { get; set; }
@@ -16,11 +30,6 @@ namespace Core.Entities
         public string RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
 
-        public int Role { get; set; } // admin / client role
-
-        [ForeignKey(nameof(Admin))]
-        public int? AdminId { get; set; }
-        public Admin Admin { get; set; }
 
         [ForeignKey(nameof(Client))]
         public int? ClientId { get; set; }

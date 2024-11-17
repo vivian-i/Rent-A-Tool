@@ -17,6 +17,7 @@ namespace Core.Data
         public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<Rental> Rentals { get; set;}
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<BatchInvoice> BatchInvoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
