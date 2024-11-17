@@ -9,8 +9,7 @@ namespace Core.Entities
     public class Address
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Street { get; set; }
         public string City { get; set; }

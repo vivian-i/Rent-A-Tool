@@ -20,7 +20,7 @@ namespace Core.Repositories
             return clients;
         }
 
-        public async Task<Client> GetClientById(Guid id)
+        public async Task<Client> GetClientById(int id)
         {
             if (id == null || _dbContext.Clients == null)
             {
@@ -28,8 +28,7 @@ namespace Core.Repositories
             }
 
             var client = await _dbContext.Clients
-                .Where(e => e.Id == id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(e => e.Id == id);
             if (client == null)
             {
                 return null;
@@ -44,7 +43,7 @@ namespace Core.Repositories
             _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteClientById(Guid id)
+        public async Task<bool> DeleteClientById(int id)
         {
             bool isDeleted = false;
 
@@ -69,11 +68,6 @@ namespace Core.Repositories
             //existingClient.
 
             await _dbContext.SaveChangesAsync();
-        }
-
-        public Task<Client> GetClientById(int id)
-        {
-            throw new NotImplementedException();
         }
 
         bool IClientRepository.UpdateClient(Client client)

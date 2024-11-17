@@ -10,8 +10,7 @@ namespace Core.Entities
     public class Invoice
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime InvoiceDate { get; set; }
         public double AmountDue { get; set; }
@@ -25,6 +24,10 @@ namespace Core.Entities
 
         [ForeignKey(nameof(Equipment))]
         public int EquipmentId { get; set;}
-        public Invoice Equipment {  get; set; }
+        public Equipment Equipment {  get; set; }
+
+        [ForeignKey(nameof(BatchInvoice))]
+        public int BatchInvoiceId { get; set; }
+        public BatchInvoice BatchInvoice {  get; set; }
     }
 }

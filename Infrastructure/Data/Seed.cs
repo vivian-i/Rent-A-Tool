@@ -74,9 +74,9 @@ namespace Core.Data
                     {
                         new Client()
                         {
+                            Id = 1,
                             Name = "Hugo Smith",
                             PhoneNumber = "0478393000",
-                            AddressId = 1,
                             Address = new Address
                             {
                                 Street = "123 Main St",
